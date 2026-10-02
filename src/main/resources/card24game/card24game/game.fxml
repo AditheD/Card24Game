@@ -1,14 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="card24game.card24game.Card24Controller"
+      alignment="CENTER"
+      spacing="18"
+      styleClass="game-root">
 
-</AnchorPane>
+    <padding>
+        <Insets top="24" right="24" bottom="24" left="24"/>
+    </padding>
+
+    <Label text="CARD GAME — 24"
+           styleClass="title"/>
+
+    <Label text="Use all four card values exactly once to make 24."
+           styleClass="subtitle"/>
+
+    <HBox alignment="CENTER" spacing="12">
+        <Button text="Find a Solution"
+                onAction="#findSolution"/>
+
+        <TextField fx:id="solutionField"
+                   editable="false"
+                   promptText="A solution appears here"
+                   prefWidth="330"/>
+
+        <Button text="Refresh"
+                onAction="#refreshCards"/>
+    </HBox>
+
+    <HBox alignment="CENTER"
+          spacing="18"
+          styleClass="card-row">
+
+        <ImageView fx:id="card1"
+                   fitWidth="135"
+                   fitHeight="190"
+                   preserveRatio="true"/>
+
+        <ImageView fx:id="card2"
+                   fitWidth="135"
+                   fitHeight="190"
+                   preserveRatio="true"/>
+
+        <ImageView fx:id="card3"
+                   fitWidth="135"
+                   fitHeight="190"
+                   preserveRatio="true"/>
+
+        <ImageView fx:id="card4"
+                   fitWidth="135"
+                   fitHeight="190"
+                   preserveRatio="true"/>
+    </HBox>
+
+    <Label fx:id="valuesLabel"
+           styleClass="values"/>
+
+    <HBox alignment="CENTER" spacing="12">
+        <Label text="Enter an expression:"
+               styleClass="input-label"/>
+
+        <TextField fx:id="expressionField"
+                   promptText="Example: (6+6)*12/6"
+                   prefWidth="330"
+                   onAction="#verifyExpression"/>
+
+        <Button text="Verify"
+                onAction="#verifyExpression"
+                defaultButton="true"
+                styleClass="verify-button"/>
+    </HBox>
+
+    <Label text="Ace = 1 • Jack = 11 • Queen = 12 • King = 13"
+           styleClass="subtitle"/>
+</VBox>

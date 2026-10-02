@@ -1,0 +1,71 @@
+.game-root {
+    -fx-background-color: #f1f5fb;
+    -fx-font-family: "Arial";
+}
+
+.title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #213c65;
+}
+
+.subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #53647b;
+}
+
+.card-row {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 14px;
+    -fx-padding: 18px;
+    -fx-effect: dropshadow(
+            gaussian, rgba(0, 0, 0, 0.12), 12, 0.15, 0, 3
+    );
+}
+
+.values {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #213c65;
+}
+
+.input-label {
+    -fx-font-size: 15px;
+    -fx-text-fill: #213c65;
+}
+
+.text-field {
+    -fx-font-size: 15px;
+    -fx-background-color: white;
+    -fx-background-radius: 7px;
+    -fx-border-color: #c3cede;
+    -fx-border-radius: 7px;
+    -fx-padding: 10px;
+}
+
+.text-field:focused {
+    -fx-border-color: #477cbd;
+}
+
+.button {
+    -fx-background-color: #dce7f5;
+    -fx-background-radius: 7px;
+    -fx-text-fill: #213c65;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 11px 16px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #c6d9ef;
+}
+
+.verify-button {
+    -fx-background-color: #315f98;
+    -fx-text-fill: white;
+}
+
+.verify-button:hover {
+    -fx-background-color: #244a79;
+}
