@@ -68,4 +68,13 @@
 
 .verify-button:hover {
     -fx-background-color: #244a79;
+
+    .button:pressed {
+        -fx-background-color: #aec7e5;
+    }
+
+    .verify-button:pressed {
+        -fx-background-color: #193858;
+    }
+
 }
