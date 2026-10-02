@@ -15,14 +15,11 @@ public class Card24Application extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(
-                Card24Application.class.getResource("game.fxml")
-        );
+        FXMLLoader loader = new FXMLLoader(Card24Application.class.getResource("game.fxml"));
 
         Scene scene = new Scene(loader.load(), 800, 500);
 
-        scene.getStylesheets().add(Objects.requireNonNull(Card24Application.class.getResource("style.css")).toExternalForm()
-        );
+        scene.getStylesheets().add(Objects.requireNonNull(Card24Application.class.getResource("style.css")).toExternalForm());
 
         stage.setTitle("Card Game - 24");
         stage.setScene(scene);

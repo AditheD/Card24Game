@@ -24,16 +24,12 @@ public class ExpressionEvaluator {
      */
     public double evaluate() {
         if (expression.isBlank()) {
-            throw new IllegalArgumentException(
-                    "Please enter an expression."
-            );
+            throw new IllegalArgumentException("Please enter an expression.");
         }
 
         // Prevent excessively long input and deeply nested parentheses.
         if (expression.length() > 200) {
-            throw new IllegalArgumentException(
-                    "The expression is too long."
-            );
+            throw new IllegalArgumentException("The expression is too long.");
         }
 
         position = 0;
@@ -43,16 +39,11 @@ public class ExpressionEvaluator {
         skipSpaces();
 
         if (position != expression.length()) {
-            throw new IllegalArgumentException(
-                    "Unexpected character at position " + (position + 1)
-                            + ". Use only numbers, +, -, *, /, and parentheses."
-            );
+            throw new IllegalArgumentException("Unexpected character at position " + (position + 1) + ". Use only numbers, +, -, *, /, and parentheses.");
         }
 
         if (!Double.isFinite(result)) {
-            throw new IllegalArgumentException(
-                    "The expression produces an invalid result."
-            );
+            throw new IllegalArgumentException("The expression produces an invalid result.");
         }
 
         return result;
@@ -88,9 +79,7 @@ public class ExpressionEvaluator {
                 double divisor = parseFactor();
 
                 if (divisor == 0.0) {
-                    throw new IllegalArgumentException(
-                            "Division by zero is not allowed."
-                    );
+                    throw new IllegalArgumentException("Division by zero is not allowed.");
                 }
 
                 value /= divisor;
@@ -108,9 +97,7 @@ public class ExpressionEvaluator {
             double value = parseExpression();
 
             if (!match(')')) {
-                throw new IllegalArgumentException(
-                        "A closing parenthesis is missing."
-                );
+                throw new IllegalArgumentException("A closing parenthesis is missing.");
             }
 
             return value;
@@ -125,18 +112,13 @@ public class ExpressionEvaluator {
         }
 
         if (start == position) {
-            throw new IllegalArgumentException(
-                    "Expected a card number or opening parenthesis at position "
-                            + (position + 1) + "."
-            );
+            throw new IllegalArgumentException("Expected a card number or opening parenthesis at position " + (position + 1) + ".");
         }
 
         String numberText = expression.substring(start, position);
 
         if (numberText.length() > 1 && numberText.startsWith("0")) {
-            throw new IllegalArgumentException(
-                    "Write card numbers without leading zeros."
-            );
+            throw new IllegalArgumentException("Write card numbers without leading zeros.");
         }
 
         int number;
@@ -144,15 +126,11 @@ public class ExpressionEvaluator {
         try {
             number = Integer.parseInt(numberText);
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(
-                    "The number entered is too large."
-            );
+            throw new IllegalArgumentException("The number entered is too large.");
         }
 
         if (number < 1 || number > 13) {
-            throw new IllegalArgumentException(
-                    "Card values must be between 1 and 13."
-            );
+            throw new IllegalArgumentException("Card values must be between 1 and 13.");
         }
 
         usedNumbers.add(number);
@@ -172,8 +150,7 @@ public class ExpressionEvaluator {
     }
 
     private void skipSpaces() {
-        while (position < expression.length()
-                && Character.isWhitespace(expression.charAt(position))) {
+        while (position < expression.length() && Character.isWhitespace(expression.charAt(position))) {
             position++;
         }
     }

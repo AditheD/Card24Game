@@ -88,29 +88,18 @@ public class Card24Controller {
             Card card = deck.get(i);
             currentValues.add(card.value());
 
-            URL imageUrl = getClass().getResource(
-                    "/png/" + card.fileName()
-            );
+            URL imageUrl = getClass().getResource("/png/" + card.fileName());
 
             if (imageUrl == null) {
-                throw new IllegalStateException(
-                        "Missing card image: " + card.fileName()
-                                + ". Check the resources/cards folder."
-                );
+                throw new IllegalStateException("Missing card image: " + card.fileName() + ". Check the resources/cards folder.");
             }
 
-            imageViews[i].setImage(
-                    new Image(imageUrl.toExternalForm())
-            );
+            imageViews[i].setImage(new Image(imageUrl.toExternalForm()));
 
-            imageViews[i].setAccessibleText(
-                    card.fileName().replace("_", " ")
-            );
+            imageViews[i].setAccessibleText(card.fileName().replace("_", " "));
         }
 
-        valuesLabel.setText(
-                "Card values: " + currentValues
-        );
+        valuesLabel.setText("Card values: " + currentValues);
 
         expressionField.clear();
         solutionField.clear();
@@ -123,9 +112,7 @@ public class Card24Controller {
     @FXML
     private void verifyExpression() {
         try {
-            ExpressionEvaluator evaluator = new ExpressionEvaluator(
-                    expressionField.getText()
-            );
+            ExpressionEvaluator evaluator = new ExpressionEvaluator(expressionField.getText());
 
             double result = evaluator.evaluate();
 
@@ -136,26 +123,22 @@ public class Card24Controller {
             Collections.sort(requiredNumbers);
 
             if (!enteredNumbers.equals(requiredNumbers)) {
-                showDialog(
-                        Alert.AlertType.ERROR,
+                showDialog(Alert.AlertType.ERROR,
                         "Incorrect card values",
                         "Use each displayed card value exactly once.\n\n"
                                 + "Required values: " + currentValues + "\n"
                                 + "Values you used: "
-                                + evaluator.getUsedNumbers()
-                );
+                                + evaluator.getUsedNumbers());
                 return;
             }
 
             if (Math.abs(result - 24.0) < EPSILON) {
-                showDialog(
-                        Alert.AlertType.INFORMATION,
+                showDialog(Alert.AlertType.INFORMATION,
                         "Correct!",
                         "Great job! Your expression evaluates to 24."
                 );
             } else {
-                showDialog(
-                        Alert.AlertType.WARNING,
+                showDialog(Alert.AlertType.WARNING,
                         "Try again",
                         String.format(
                                 Locale.US,
@@ -166,8 +149,7 @@ public class Card24Controller {
             }
 
         } catch (IllegalArgumentException exception) {
-            showDialog(
-                    Alert.AlertType.ERROR,
+            showDialog(Alert.AlertType.ERROR,
                     "Invalid expression",
                     exception.getMessage()
             );
@@ -182,9 +164,7 @@ public class Card24Controller {
         List<Calculation> numbers = new ArrayList<>();
 
         for (int value : currentValues) {
-            numbers.add(
-                    new Calculation(value, String.valueOf(value))
-            );
+            numbers.add(new Calculation(value, String.valueOf(value)));
         }
 
         String solution = solve(numbers);
@@ -192,8 +172,7 @@ public class Card24Controller {
         if (solution == null) {
             solutionField.setText("No solution");
 
-            showDialog(
-                    Alert.AlertType.INFORMATION,
+            showDialog(Alert.AlertType.INFORMATION,
                     "No solution",
                     "This hand cannot make 24 with the allowed operations.\n"
                             + "Click Refresh to deal another hand."
@@ -210,9 +189,7 @@ public class Card24Controller {
      */
     private String solve(List<Calculation> numbers) {
         if (numbers.size() == 1) {
-            return Math.abs(numbers.get(0).value() - 24.0) < EPSILON
-                    ? numbers.get(0).expression()
-                    : null;
+            return Math.abs(numbers.get(0).value() - 24.0) < EPSILON ? numbers.get(0).expression() : null;
         }
 
         for (int i = 0; i < numbers.size(); i++) {
@@ -260,32 +237,23 @@ public class Card24Controller {
         return null;
     }
 
-    private Calculation combine(
-            Calculation a,
-            Calculation b,
-            char operator
-    ) {
+    private Calculation combine(Calculation a, Calculation b, char operator) {
+
         double value = switch (operator) {
             case '+' -> a.value() + b.value();
             case '-' -> a.value() - b.value();
             case '*' -> a.value() * b.value();
             case '/' -> a.value() / b.value();
-            default -> throw new IllegalArgumentException(
-                    "Unsupported operator."
-            );
+            default -> throw new IllegalArgumentException("Unsupported operator.");
         };
 
-        String expression = "(" + a.expression()
-                + operator + b.expression() + ")";
+        String expression = "(" + a.expression() + operator + b.expression() + ")";
 
         return new Calculation(value, expression);
     }
 
-    private void showDialog(
-            Alert.AlertType type,
-            String title,
-            String message
-    ) {
+    private void showDialog(Alert.AlertType type, String title, String message) {
+
         Alert alert = new Alert(type);
         alert.initOwner(expressionField.getScene().getWindow());
         alert.setTitle(title);
