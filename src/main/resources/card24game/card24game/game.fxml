@@ -22,7 +22,7 @@
     <Label text="CARD GAME — 24"
            styleClass="title"/>
 
-    <Label text="Use all four card values exactly once to make 24."
+    <Label text="Use each card once to make 24. Refresh deals a new hand."
            styleClass="subtitle"/>
 
     <HBox alignment="CENTER" spacing="12">
